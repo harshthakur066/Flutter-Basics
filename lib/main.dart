@@ -19,7 +19,7 @@ class MyAppState extends State<MyApp> {
       'answers': ['Black', 'Red', 'Green', 'Blue']
     },
     {
-      'questionText': 'What\'s yuor fav. animal?',
+      'questionText': 'What\'s your fav. animal?',
       'answers': ['Cow', 'Dog', 'Cat', 'Monkey']
     },
     {
@@ -29,6 +29,12 @@ class MyAppState extends State<MyApp> {
   ];
 
   var questionIndex = 0;
+
+  void resetApp() {
+    setState(() {
+      questionIndex = 0;
+    });
+  }
 
   void answerQuestions() {
     setState(() {
@@ -58,7 +64,30 @@ class MyAppState extends State<MyApp> {
                   ],
                 )
               : Center(
-                  child: Text('That\'s it, thanks for your time.'),
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        'That\'s it, thanks for your time.',
+                        style: TextStyle(
+                          fontSize: 36,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(' '),
+                      RaisedButton(
+                        child: Text(
+                          'Reset',
+                          style: TextStyle(
+                            fontSize: 36,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onPressed: resetApp,
+                      ),
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  ),
                 )),
     );
   }
