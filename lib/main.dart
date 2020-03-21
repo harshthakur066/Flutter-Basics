@@ -13,6 +13,21 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
+  final questions = const [
+    {
+      'questionText': 'What\'s your fav. color?',
+      'answers': ['Black', 'Red', 'Green', 'Blue']
+    },
+    {
+      'questionText': 'What\'s yuor fav. animal?',
+      'answers': ['Cow', 'Dog', 'Cat', 'Monkey']
+    },
+    {
+      'questionText': 'What you prefer?',
+      'answers': ['Instagram', 'Facebook', 'Twitter', 'Reddit']
+    }
+  ];
+
   var questionIndex = 0;
 
   void answerQuestions() {
@@ -25,38 +40,26 @@ class MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
-      {
-        'questionText': 'What\'s your fav. color?',
-        'answers': ['Black', 'Red', 'Green', 'Blue']
-      },
-      {
-        'questionText': 'What\'s yuor fav. animal?',
-        'answers': ['Cow', 'Dog', 'Cat', 'Monkey']
-      },
-      {
-        'questionText': 'What you prefer?',
-        'answers': ['Instagram', 'Facebook', 'Twitter', 'Reddit']
-      }
-    ];
-
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('My First App'),
-        ),
-        body: Column(
-          children: [
-            Question(
-              questions[questionIndex]['questionText'],
-            ),
-            ...(questions[questionIndex]['answers'] as List<String>)
-                .map((answer) {
-              return Answer(answerQuestions, answer);
-            }).toList()
-          ],
-        ),
-      ),
+          appBar: AppBar(
+            title: Text('My First App'),
+          ),
+          body: (questionIndex < questions.length)
+              ? Column(
+                  children: [
+                    Question(
+                      questions[questionIndex]['questionText'],
+                    ),
+                    ...(questions[questionIndex]['answers'] as List<String>)
+                        .map((answer) {
+                      return Answer(answerQuestions, answer);
+                    }).toList()
+                  ],
+                )
+              : Center(
+                  child: Text('That\'s it, thanks for your time.'),
+                )),
     );
   }
 }
